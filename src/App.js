@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FriendCard from "./components/FriendCard";
+import NavBar from "./components/NavBar/navbar";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./characters.json";
@@ -7,21 +8,28 @@ import friends from "./characters.json";
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    friends
+    friends,
+    topScore: 0,
+    currentScore: 0,
+    right: "",
+    clicked: []
   };
 
-  removeFriend = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    const friends = this.state.friends.filter(friend => friend.id !== id);
-    // Set this.state.friends equal to the new friends array
-    this.setState({ friends });
-  };
+  //  clickPhoto = id => {
+  //    let clicked = this.state.clicked;
 
+  //  }
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
+      <div>
+      <NavBar
+        highScore={this.state.highScore}
+        clickCount={this.state.clickCount}
+      />
+
       <Wrapper>
-        <Title>Clicky Game</Title>
+        <Title>Try to click on each character, but don't hit any duplicates!</Title>
         {this.state.friends.map(friend => (
           <FriendCard
             id={friend.id}
@@ -31,6 +39,7 @@ class App extends Component {
           />
         ))}
       </Wrapper>
+      </div>
     );
   }
 }
