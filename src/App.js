@@ -15,17 +15,51 @@ class App extends Component {
     clicked: []
   };
 
-  //  clickPhoto = id => {
-  //    let clicked = this.state.clicked;
+  clickCard = (id) => {
+    const element = document.getElementById("wrapper");
 
-  //  }
+    if (!this.state.clicked.includes(id)){
+      element.classList.remove("shake");
+      this.setState({
+        clicked: this.state.clicked.concat(id),
+        currentScore: this.state.currentScore+1
+        })
+        console.log(this.state.currentScore);
+    }
+    //user's score reset to 0 if they click the same image more than once.
+    else {
+      element.classList.add("shake");
+      this.setState({
+        clicked: [],
+        currentScore: 0
+        })
+    }
+    this.setCurrentScore();
+    this.shuffleCards();
+  }
+
+
+  shuffleCards = () => {
+    for (let i =0; i<friends.length; i++) {
+      let elem = friends[i];
+      let randomNum=Math.floor(Math.random() * friends.length);
+      friends[i]=friends[randomNum];
+      friends[randomNum]=elem;
+    }
+  }
+
+  setCurrentScore = () => {
+    if (this.state.currentScore > this.state.topScore) {
+      return this.setState({topScore: this.state.currentScore})
+    }
+  }
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
       <div>
       <NavBar
-        highScore={this.state.highScore}
-        clickCount={this.state.clickCount}
+        highScore={this.state.topScore}
+        clickCount={this.state.currentScore}
       />
 
       <Wrapper>
@@ -36,6 +70,7 @@ class App extends Component {
             key={friend.id}
             name={friend.name}
             image={friend.image}
+            clickCard={this.clickCard}
           />
         ))}
       </Wrapper>

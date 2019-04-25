@@ -12,7 +12,7 @@ const styles = {
 function NavBar(props) {
     return (
         <nav style ={styles.navBar} className="navbar navbar-dark bg-dark">
-        <span className="navbar-brand mb-0 h1">Clicky Game</span>
+        <span className="navbar-brand mb-0 h1">Clicky Game - Parks and Rec Style!</span>
         <span style = {styles.scores} id = "scores">Current Score: {props.clickCount} | High Score: {props.highScore}</span>
         </nav>
     )
