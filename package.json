@@ -14,7 +14,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
+<<<<<<< HEAD
     "deploy": "gh-pages -b master -d build"
+=======
+    "deploy": "gh-pages -d build"
+>>>>>>> parent of 10a1de9... on click score goes up
   },
   "eslintConfig": {
     "extends": "react-app"
