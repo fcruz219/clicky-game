@@ -16,8 +16,10 @@ class App extends Component {
   };
 
   clickCard = (id) => {
+    // targets wrapper to make it shake
     const element = document.getElementById("wrapper");
 
+    //if imaged click on does not match existing id then set state of id to clicked and add to current score
     if (!this.state.clicked.includes(id)){
       element.classList.remove("shake");
       this.setState({
@@ -26,7 +28,7 @@ class App extends Component {
         })
         console.log(this.state.currentScore);
     }
-    //user's score reset to 0 if they click the same image more than once.
+    //if image clicked matches existing id then add shake id to wrapper, empty clicked array and set score to 0
     else {
       element.classList.add("shake");
       this.setState({
@@ -38,7 +40,7 @@ class App extends Component {
     this.shuffleCards();
   }
 
-
+// shuffles cards. runs through the friends json and makes the friends[i] loop and sets a random list.
   shuffleCards = () => {
     for (let i =0; i<friends.length; i++) {
       let elem = friends[i];
@@ -48,6 +50,7 @@ class App extends Component {
     }
   }
 
+  //sets current score
   setCurrentScore = () => {
     if (this.state.currentScore > this.state.topScore) {
       return this.setState({topScore: this.state.currentScore})
